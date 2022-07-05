@@ -1,0 +1,1 @@
+web: gunicorn samplejam_project.wsgi --log-file -

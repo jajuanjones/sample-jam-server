@@ -13,14 +13,14 @@ class MusicView(ViewSet):
         try:
             music = Music.objects.get(pk=pk)
             serializer = MusicSerializer(music)
-            return Response(serializer.data)
+            return Response(serializer.data, context={'request': request})
         except Music.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
         """List all songs"""
         music = Music.objects.all()
-        serializer = MusicSerializer(music, many=True)
+        serializer = MusicSerializer(music, many=True, context={'request': request})
         return Response(serializer.data)
 
     def create(self, request):

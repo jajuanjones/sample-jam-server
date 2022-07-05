@@ -7,3 +7,11 @@ class Music(models.Model):
     song = models.FileField(upload_to='usermusic', max_length=None, null=True)
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="songs")
     genres = models.ManyToManyField("Genre", related_name="music")
+
+    @property
+    def is_my_song(self):
+        return self.__is_my_song
+    
+    @is_my_song.setter
+    def is_my_song(self, value):
+        self.__is_my_song = value
